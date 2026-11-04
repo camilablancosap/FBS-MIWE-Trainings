@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>MIWE FBS Training</title>
+  <style>
+    :root{
+      --dn:#002A86;--dp:#00144A;--sb:#1B90FF;--lb:#0070F2;
+      --lbl:#89D1FF;--lsk:#D1EFFF;--wh:#FFFFFF;
+      --dg:#666666;--mg:#999999;--pg:#EAECEE;
+      --sh:rgba(0,42,134,.10);--shm:rgba(0,42,134,.20);
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'72 Brand','SAP 72','Segoe UI',Arial,sans-serif;background:#EEF3FC;color:var(--dp);min-height:100vh}
+    /* HEADER */
+    .hdr{background:linear-gradient(155deg,#002A86 0%,#001575 50%,#00144A 100%);color:#fff;position:relative;overflow:hidden}
+    .hdr::after{content:'';position:absolute;right:-80px;top:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(27,144,255,.15) 0%,transparent 65%);pointer-events:none}
+    .hdr-i{max-width:1280px;margin:0 auto;padding:38px 52px 46px;display:flex;align-items:flex-start;gap:36px}
+    .logo{flex-shrink:0;width:112px;padding-top:2px}
+    .logo svg{width:112px;height:auto;display:block}
+    .hb{flex:1;min-width:0}
+    .ey{font-size:11.5px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--lbl);opacity:.9;margin-bottom:10px}
+    .ht{font-size:42px;font-weight:700;line-height:1.1;color:#fff;letter-spacing:-.5px;margin-bottom:10px}
+    .ht em{font-style:normal;color:var(--lbl)}
+    .hs{font-size:16px;color:rgba(255,255,255,.72);font-style:italic;letter-spacing:.3px;margin-bottom:16px}
+    .hd{font-size:14px;color:rgba(255,255,255,.68);max-width:660px;line-height:1.7}
+    /* MAIN */
+    .main{max-width:1280px;margin:0 auto;padding:40px 52px 64px}
+    /* SESSION GRID */
+    .sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:22px}
+    /* SESSION CARD */
+    .scard{background:#fff;border-radius:18px;box-shadow:0 3px 16px var(--sh);overflow:hidden;display:flex;flex-direction:column;border:1px solid rgba(27,144,255,.10);transition:transform .2s,box-shadow .2s}
+    .scard:hover{transform:translateY(-4px);box-shadow:0 10px 30px var(--shm)}
+    .ctop{background:linear-gradient(135deg,#E5F2FF 0%,#D1EBFF 100%);padding:16px 22px 14px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(27,144,255,.12)}
+    .sbdg{background:var(--dn);color:#fff;font-size:11.5px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;padding:5px 14px;border-radius:20px}
+    .sdt{font-size:12.5px;color:var(--dn);font-weight:600}
+    .cbody{padding:20px 22px;flex:1;display:flex;flex-direction:column;gap:14px}
+    .stit{font-size:17px;font-weight:700;color:var(--dp);line-height:1.35}
+    .spr{display:flex;align-items:flex-start;gap:10px}
+    .sav{width:34px;height:34px;background:var(--lsk);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .sav svg{width:17px;height:17px;fill:var(--dn)}
+    .spl{font-size:10.5px;color:var(--mg);text-transform:uppercase;letter-spacing:.9px;font-weight:600;margin-bottom:2px}
+    .spn{font-size:13.5px;color:var(--dn);font-weight:600;line-height:1.4}
+    .cft{padding:0 22px 22px}
+    .btn-row{display:flex;gap:8px}
+    .wbtn{display:flex;align-items:center;justify-content:center;gap:7px;flex:1;padding:11px 10px;background:var(--dn);color:#fff;border:none;border-radius:10px;font-family:inherit;font-size:12px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:background .18s,transform .12s}
+    .wbtn:hover{background:var(--dp);transform:scale(1.015)}
+    .wbtn svg{width:16px;height:16px;fill:#fff;flex-shrink:0}
+    .pptbtn{display:flex;align-items:center;justify-content:center;gap:7px;flex:1;padding:11px 10px;background:#E5F4FF;color:#002A86;border:1.5px solid #89D1FF;border-radius:10px;font-family:inherit;font-size:12px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:background .18s,border-color .18s,transform .12s}
+    .pptbtn:hover{background:#C8E8FF;border-color:#4EA8DE;transform:scale(1.015)}
+    .pptbtn svg{width:16px;height:16px;fill:#002A86;flex-shrink:0}
+    .pptbtn.dis{background:#F2F4F7;color:#aaa;border-color:#D8DDE6;cursor:default;pointer-events:none}
+    .pptbtn.dis svg{fill:#bbb}
+    /* THANK YOU SECTION */
+    .ty{margin-top:60px;background:#fff;border-radius:22px;padding:44px 50px;border:1px solid rgba(27,144,255,.14);box-shadow:0 3px 16px var(--sh);position:relative;overflow:hidden}
+    .ty::before{content:'';position:absolute;left:-60px;bottom:-60px;width:240px;height:240px;background:radial-gradient(circle,rgba(209,239,255,.55) 0%,transparent 70%);pointer-events:none}
+    .ty-h{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+    .ty-ico{width:48px;height:48px;background:linear-gradient(135deg,var(--sb),var(--lb));border-radius:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 3px 10px rgba(27,144,255,.30)}
+    .ty-ico svg{width:25px;height:25px;fill:#fff}
+    .ty-tit{font-size:22px;font-weight:700;color:var(--dp)}
+    .ty-desc{font-size:15px;color:#2d3a5a;line-height:1.72;max-width:800px;margin-bottom:30px}
+    .ty-ppl{display:flex;flex-wrap:wrap;gap:14px}
+    .ty-card{background:linear-gradient(135deg,var(--lsk) 0%,#E0EEFF 100%);border:1.5px solid rgba(27,144,255,.18);border-radius:16px;padding:16px 22px;display:flex;align-items:center;gap:14px;box-shadow:0 2px 10px var(--sh);transition:transform .18s,box-shadow .18s}
+    .ty-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px var(--shm)}
+    .ty-av{width:44px;height:44px;background:linear-gradient(135deg,var(--dn),var(--sb));border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:700;flex-shrink:0;letter-spacing:.5px}
+    .ty-info{display:flex;flex-direction:column;gap:2px}
+    .ty-role{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--lb);margin-bottom:1px}
+    .ty-nm{font-size:15px;font-weight:700;color:var(--dp)}
+    /* INITIATIVE */
+    .init{margin-top:24px;background:linear-gradient(135deg,#002A86 0%,#001060 60%,#00144A 100%);border-radius:22px;padding:44px 50px;border:1px solid rgba(27,144,255,.22);position:relative;overflow:hidden}
+    .init::before{content:'';position:absolute;right:-60px;top:-60px;width:260px;height:260px;background:radial-gradient(circle,rgba(27,144,255,.18) 0%,transparent 65%);pointer-events:none}
+    .inh{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+    .inico{width:48px;height:48px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);border-radius:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .inico svg{width:25px;height:25px;fill:var(--lbl)}
+    .intit{font-size:22px;font-weight:700;color:#fff}
+    .indesc{font-size:15px;color:rgba(255,255,255,.78);line-height:1.72;max-width:800px;margin-bottom:28px}
+    .inppl{display:flex;flex-wrap:wrap;gap:14px}
+    .pch{background:rgba(255,255,255,.10);border:1.5px solid rgba(255,255,255,.22);border-radius:40px;padding:10px 20px;display:flex;align-items:center;gap:10px;backdrop-filter:blur(4px)}
+    .pav{width:36px;height:36px;background:linear-gradient(135deg,rgba(255,255,255,.22),rgba(137,209,255,.30));border:1px solid rgba(255,255,255,.30);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700;flex-shrink:0}
+    .pnm{font-size:14px;font-weight:600;color:#fff}
+    /* MANAGEMENT ACKNOWLEDGMENT */
+    .mgmt{margin-top:28px;padding:22px 32px;text-align:center;border-top:1px solid rgba(0,42,134,.10)}
+    .mgmt-label{font-size:10.5px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--mg);margin-bottom:8px}
+    .mgmt-names{font-size:14.5px;font-weight:600;color:#3a5080;letter-spacing:.2px}
+    .mgmt-role{font-size:11.5px;color:var(--mg);margin-top:3px;letter-spacing:.3px}
+    .mgmt-sep{display:inline-block;width:1px;height:11px;background:rgba(0,42,134,.2);margin:0 10px;vertical-align:middle}
+    /* FOOTER */
+    .ftr{background:var(--dp);color:rgba(255,255,255,.5);text-align:center;padding:22px 52px;font-size:12px;letter-spacing:.5px}
+    .ftr strong{color:rgba(255,255,255,.8)}
+    /* RESPONSIVE */
+    @media(max-width:900px){.hdr-i{padding:28px 24px 36px;gap:20px}.main{padding:28px 20px 48px}.ht{font-size:30px}.sgrid{grid-template-columns:1fr}.ty{padding:30px 24px}.init{padding:30px 24px}}
+    @media(max-width:600px){.hdr-i{flex-direction:column}.logo{width:80px}.tbtn{padding:10px 16px;font-size:13px}.cgw{padding:14px 10px 16px}.cc{min-height:48px;padding:5px 2px 3px}.cdn{font-size:12px}}
+  </style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-i">
+    <div class="logo">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 412.4 204" style="enable-background:new 0 0 412.4 204;" xml:space="preserve" aria-label="SAP Logo">
+        <defs><linearGradient id="sg" gradientUnits="userSpaceOnUse" x1="206.19" y1="206" x2="206.19" y2="2" gradientTransform="matrix(1 0 0 -1 0 206)"><stop offset="0" style="stop-color:#00B8F1"/><stop offset="0.02" style="stop-color:#01B6F0"/><stop offset="0.31" style="stop-color:#0D90D9"/><stop offset="0.58" style="stop-color:#1775C8"/><stop offset="0.82" style="stop-color:#1C65BF"/><stop offset="1" style="stop-color:#1E5FBB"/></linearGradient></defs>
+        <polyline style="fill-rule:evenodd;clip-rule:evenodd;fill:url(#sg);" points="0,204 208.4,204 412.4,0 0,0 0,204"/>
+        <path style="fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;" d="M244.7,38.4h-40.6v96.5l-35.5-96.6h-35.2l-30.3,80.7C100,98.7,79,91.7,62.4,86.4C51.5,82.9,39.8,77.7,40,72c0.1-4.7,6.2-9,18.4-8.4c8.2,0.4,15.4,1.1,29.7,8l14.1-24.5c-13.1-6.6-31.2-10.9-46-10.9h-0.1c-17.3,0-31.7,5.6-40.6,14.8c-6.2,6.3-9.7,14.8-9.7,23.7C5.5,87.2,10.1,96,19.7,103c8.1,5.9,18.5,9.8,27.6,12.6c11.3,3.5,20.5,6.5,20.4,13c-0.1,2.4-1,4.7-2.7,6.4c-2.8,2.9-7.1,4-13.1,4.1c-11.5,0.2-20-1.6-33.6-9.6L5.8,154.4c14,8,29.9,12.2,46,12.2h2.1c14.2-0.2,25.7-4.3,34.9-11.7c0.5-0.4,1-0.8,1.5-1.3l-4.1,10.9H123l6.2-18.8c7,2.3,14.3,3.5,21.7,3.4c7.2,0,14.3-1.1,21.2-3.2l6,18.6h60.1v-39h13.1c31.7,0,50.5-16.2,50.5-43.2C301.7,52.2,283.5,38.4,244.7,38.4z M150.9,121c-4.4,0-8.8-0.7-13-2.3l12.9-40.6h0.2l12.6,40.7C159.6,120.3,155.2,121,150.9,121z M247.1,97.7h-8.9V64.9h8.9c11.9,0,21.4,4,21.4,16.1C268.5,93.7,259,97.6,247.1,97.7"/>
+      </svg>
+    </div>
+    <div class="hb">
+      <div class="ey">MIWE FBS Team &nbsp;&middot;&nbsp; Internal Knowledge Hub</div>
+      <h1 class="ht">MIWE <em>FBS</em> Training</h1>
+      <p class="hs">Knowledge sharing. Continuous learning. Team development.</p>
+      <p class="hd">This dashboard centralizes the training sessions delivered to support knowledge development and collaboration within the MIWE FBS team &mdash; bringing together all sessions, presenters, original dates and recording links in one unified reference space.</p>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+
+  <div class="sgrid" id="sgrid"></div>
+
+
+  <!-- THANK YOU SECTION -->
+  <section class="ty">
+    <div class="ty-h">
+      <div class="ty-ico">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm4.24 16L12 15.45 7.77 18l1.12-4.81-3.73-3.23 4.92-.42L12 5l1.92 4.53 4.92.42-3.73 3.23L16.23 18z"/></svg>
+      </div>
+      <h2 class="ty-tit">Thank You, Team!</h2>
+    </div>
+    <p class="ty-desc">A big thank you to all our West and Midwest colleagues who took the time to share their knowledge, experience and expertise through these training sessions. Your contribution, collaboration and willingness to support one another made this initiative possible.</p>
+    <div class="ty-ppl">
+      <div class="ty-card">
+        <div class="ty-av">SA</div>
+        <div class="ty-info"><div class="ty-role">Presenter</div><div class="ty-nm">Sebastian Aramburu</div></div>
+      </div>
+      <div class="ty-card">
+        <div class="ty-av">MV</div>
+        <div class="ty-info"><div class="ty-role">Presenter</div><div class="ty-nm">Marianella Vigil</div></div>
+      </div>
+      <div class="ty-card">
+        <div class="ty-av">NS</div>
+        <div class="ty-info"><div class="ty-role">Presenter</div><div class="ty-nm">Natalie Soriano</div></div>
+      </div>
+      <div class="ty-card">
+        <div class="ty-av">KM</div>
+        <div class="ty-info"><div class="ty-role">Presenter</div><div class="ty-nm">Kayla Magana</div></div>
+      </div>
+      <div class="ty-card">
+        <div class="ty-av">DC</div>
+        <div class="ty-info"><div class="ty-role">Presenter</div><div class="ty-nm">Diego Contreras</div></div>
+      </div>
+      <div class="ty-card">
+        <div class="ty-av">RM</div>
+        <div class="ty-info"><div class="ty-role">Presenter</div><div class="ty-nm">Raul Morales</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEHIND THE INITIATIVE -->
+  <section class="init">
+    <div class="inh">
+      <div class="inico"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
+      <h2 class="intit">Behind the Initiative</h2>
+    </div>
+    <p class="indesc">Special thanks to Lorenzo Mantelo, Pilar Santacreu and Martina Carbajales for coordinating the initiative, organizing the training sessions and supporting our FBS colleagues throughout the process.</p>
+    <div class="inppl">
+      <div class="pch"><div class="pav">LM</div><span class="pnm">Lorenzo Mantelo</span></div>
+      <div class="pch"><div class="pav">PS</div><span class="pnm">Pilar Santacreu</span></div>
+      <div class="pch"><div class="pav">MC</div><span class="pnm">Martina Carbajales</span></div>
+    </div>
+  </section>
+
+  <!-- MANAGEMENT ACKNOWLEDGMENT -->
+  <div class="mgmt">
+    <div class="mgmt-names">Florencia Petracca<span class="mgmt-sep"></span>Camila Blanco</div>
+    <div class="mgmt-role">MIWE Managers</div>
+  </div>
+
+</main>
+
+
+<footer class="ftr">
+  <strong>MIWE FBS Training Hub</strong> &nbsp;&middot;&nbsp; SAP Internal &nbsp;&middot;&nbsp; 12 sessions &mdash; October 2026
+</footer>
+
+<script>
+const S=[
+  {n:1,y:2026,m:9,d:5,dt:"Monday, October 5, 2026",tm:"3:00 PM",ti:"Melody & Discovery Call + Opp Creation in Harmony",pr:"Sebastian Aramburu / Marianella Vigil",u:"https://sap-my.sharepoint.com/:v:/p/lorenzo_mantelo/IQDoauXh6joVQZNWdICZNn6pAZbzlkfDQtAth3x7NMoUfko?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=5YjTJ3",p:"https://workzone.one.int.sap/site#workzone-home&/groups/Ngj6SjwPVU4my3JuhLD001/documents/OY6eWr3g4QTsVoGoDEp001/slide_viewer"},
+  {n:2,y:2026,m:9,d:7,dt:"Wednesday, October 7, 2026",tm:"4:30 PM",ti:"Opp Creation in CRM + Upload BoM to CRM w/ SAP Logon",pr:"Sebastian Aramburu / Marianella Vigil",u:"https://sap-my.sharepoint.com/:v:/p/lorenzo_mantelo/IQArrqgMlJghRIJrFtNT2bmZAZZuvQPZ8HxpO0y7Nu93CDY?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=XrLOZV",p:"https://workzone.one.int.sap/site#workzone-home&/groups/Ngj6SjwPVU4my3JuhLD001/documents/Pqt9kMcBY9KUfdZphcn001/slide_viewer"},
+  {n:3,y:2026,m:9,d:9,dt:"Friday, October 9, 2026",tm:"3:30 PM",ti:"Common Errors in Quotes",pr:"Natalie Soriano",u:"https://sap-my.sharepoint.com/:v:/p/lorenzo_mantelo/IQDDty5WzJXtTqLaxrkivrCLASPrHl7--dWXvUBv3xSRtW4?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=pbCYV0",p:"https://workzone.one.int.sap/site#workzone-home&/groups/Ngj6SjwPVU4my3JuhLD001/documents/d6TtbgteMCCmWQWRihP001/slide_viewer"},
+  {n:4,y:2026,m:9,d:14,dt:"Wednesday, October 14, 2026",tm:"4:00 PM",ti:"Phase Builder and Provisioning Details",pr:"Kayla Magana",u:"https://sap-my.sharepoint.com/:v:/p/lorenzo_mantelo/IQCZoDzhElGWTr5aP5wssLNoARXVIWus1_t95XgWdkOajSE?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=pYBVAz",p:"https://workzone.one.int.sap/site#workzone-home&/groups/Ngj6SjwPVU4my3JuhLD001/documents/RBYL2I2zd7fvQe4Dosz001/slide_viewer"},
+  {n:5,y:2026,m:9,d:15,dt:"Thursday, October 15, 2026",tm:"4:00 PM",ti:"Pricing & Transformation Incentive",pr:"Diego Contreras",u:"https://sap-my.sharepoint.com/:v:/p/lorenzo_mantelo/IQBfjBGlgH5dS4FudtcFKL_CAQw1_r7VpoZ5KrwYfO_JZ44?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=qpefyg",p:"https://workzone.one.int.sap/site#workzone-home&/groups/Ngj6SjwPVU4my3JuhLD001/documents/gSaSwHh3f6gsVQeiBRq001/slide_viewer"},
+  {n:6,y:2026,m:9,d:16,dt:"Friday, October 16, 2026",tm:"3:00 PM",ti:"New Business + DMT",pr:"Marianella Vigil",u:"https://sap-my.sharepoint.com/:v:/p/lorenzo_mantelo/IQDZqUjio1ljTa5TMy_yH7PvAez4FMl84nv5YkQeg1Z4pmw?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=bmWKrg",p:"https://workzone.one.int.sap/site#workzone-home&/groups/Ngj6SjwPVU4my3JuhLD001/documents/zRTaq8FBUG9MxFp4tJ7001/slide_viewer"},
+  {n:7,y:2026,m:9,d:19,dt:"Monday, October 19, 2026",tm:"3:00 PM",ti:"Add-ons",pr:"Diego Contreras",u:"https://sap-my.sharepoint.com/:v:/p/lorenzo_mantelo/IQDlmjK4QN9xTqPFeWHAHamqAcalxX-QYVIPd3pQI465zCk?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=KyH9pK",p:"https://workzone.one.int.sap/site#workzone-home&/groups/Ngj6SjwPVU4my3JuhLD001/documents/YJ5Z5EdLyO1kduilrkl001/slide_viewer"},
+  {n:8,y:2026,m:9,d:21,dt:"Wednesday, October 21, 2026",tm:"3:00 PM",ti:"OQR",pr:"Diego Contreras",u:"https://sap-my.sharepoint.com/:v:/p/lorenzo_mantelo/IQABhueuG0c6Tq3U-9XhPD2ZAfsEt3mX5KHhL4fIk-2a13g?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=35aqAH",p:"https://workzone.one.int.sap/site#workzone-home&/groups/Ngj6SjwPVU4my3JuhLD001/documents/P3pgZAGZTWLvx7FOiqR001/slide_viewer"},
+  {n:9,y:2026,m:9,d:23,dt:"Friday, October 23, 2026",tm:"3:00 PM",ti:"SWAP",pr:"Kayla Magana",u:"https://sap-my.sharepoint.com/:v:/p/lorenzo_mantelo/IQAiLOMjVPqUT5IWlTigKgjhAW0brrgTcj2F5XXH-eHB5QQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=jEhcjw",p:"https://workzone.one.int.sap/site#workzone-home&/groups/Ngj6SjwPVU4my3JuhLD001/documents/mFSEhbMU0i6RL8OiBO8001/slide_viewer"},
+  {n:10,y:2026,m:9,d:26,dt:"Monday, October 26, 2026",tm:"3:00 PM",ti:"ADMIN",pr:"Marianella Vigil",u:"https://sap-my.sharepoint.com/:v:/p/lorenzo_mantelo/IQAiGMhfkkxmRppIUL_R0Ue6AVXvQAeEa2VuMTf1hlbIRXk?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=3HUbC1",p:"https://workzone.one.int.sap/site#workzone-home&/groups/Ngj6SjwPVU4my3JuhLD001/documents/tTdFFGJ7XAv40HknQ1I001/slide_viewer"},
+  {n:11,y:2026,m:9,d:28,dt:"Wednesday, October 28, 2026",tm:"3:00 PM",ti:"Change Quote",pr:"Diego Contreras",u:"https://sap-my.sharepoint.com/:v:/p/lorenzo_mantelo/IQDTPewDRmVYQYbWC5JtzBUSAXZFZyt0F10Ft1KRQThqseo?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=Cw0cn7",p:"https://workzone.one.int.sap/site#workzone-home&/groups/Ngj6SjwPVU4my3JuhLD001/documents/sLyNG8sWMZh3jsJaroP001/slide_viewer"},
+  {n:12,y:2026,m:9,d:30,dt:"Friday, October 30, 2026",tm:"3:00 PM",ti:"CIC",pr:"Raul Morales",u:"https://sap-my.sharepoint.com/:v:/p/lorenzo_mantelo/IQCMWyrOs77uSKc1Z04PVPsIAWKuAyWh1QxPBqmbblhr144?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=Dlkm4T",p:"https://workzone.one.int.sap/site#workzone-home&/groups/Ngj6SjwPVU4my3JuhLD001/documents/gHnCblUy32wm1bA3GnB001/slide_viewer"}
+];
+
+function esc(str){
+  const d=document.createElement('div');
+  d.appendChild(document.createTextNode(str));
+  return d.innerHTML;
+}
+
+const grid=document.getElementById('sgrid');
+S.forEach(s=>{
+  const card=document.createElement('div');
+  card.className='scard';
+  card.innerHTML=`
+    <div class="ctop">
+      <div class="sbdg">Session ${String(s.n).padStart(2,'0')}</div>
+      <div class="sdt">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="#002A86" style="vertical-align:middle;margin-right:4px"><path d="M19 4h-1V2h-2v2H8V2H6v2H5C3.89 4 3 4.9 3 6v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zM7 11h5v5H7z"/></svg>
+        ${esc(s.dt.replace(', 2026',''))}
+      </div>
+    </div>
+    <div class="cbody">
+      <div class="stit">${esc(s.ti)}</div>
+      <div class="spr">
+        <div class="sav"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
+        <div><div class="spl">Presenter(s)</div><div class="spn">${esc(s.pr)}</div></div>
+      </div>
+    </div>
+    <div class="cft">
+      <div class="btn-row">
+        <a class="wbtn" href="${s.u}" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          Watch Recording
+        </a>
+        ${s.p
+          ? `<a class="pptbtn" href="${s.p}" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm-7 14H7v-2h5v2zm5-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+              PPT Slides
+            </a>`
+          : `<span class="pptbtn dis">
+              <svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm-7 14H7v-2h5v2zm5-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+              PPT Slides
+            </span>`
+        }
+      </div>
+    </div>`;
+  grid.appendChild(card);
+});
+</script>
+</body>
+</html>
